@@ -18,7 +18,7 @@ ExportedObj/
 *.booproj
 *.svd
 *.dll
-
+*.vs
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -29,7 +29,3 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-.vs/PacMan/v15/Server/sqlite3/storage.ide-shm
-.vs/PacMan/v15/Server/sqlite3/storage.ide
-.vs/PacMan/v15/Server/sqlite3/storage.ide-wal
-.vs/PacMan/v15/Server/sqlite3/db.lock
