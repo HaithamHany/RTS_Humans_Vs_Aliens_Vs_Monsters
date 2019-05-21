@@ -30,7 +30,7 @@ public class CameraMovement : MonoBehaviour
 
         else if (Input.mousePosition.x > Screen.width * 0.95f)
             movementVector += right * moveSpeed * Time.deltaTime ;
-        else if (Input.mousePosition.x < Screen.height * 0.5f)
+        else if (Input.mousePosition.x < Screen.height * 0.05f)
             movementVector -= right * moveSpeed * Time.deltaTime ;
 
         gameObject.transform.position = movementVector;
