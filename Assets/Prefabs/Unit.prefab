@@ -350,8 +350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b452878797aaac441a56141c3e5d2dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionCanvas: {fileID: 0}
-  locationPointerPrefab: {fileID: 0}
+  selectionCanvas: {fileID: 1549571252894272273}
+  locationPointerPrefab: {fileID: 3252873086288250816, guid: d19b0761dccabe640b2b60c05643c123,
+    type: 3}
 --- !u!195 &1549571253504426022
 NavMeshAgent:
   m_ObjectHideFlags: 0
