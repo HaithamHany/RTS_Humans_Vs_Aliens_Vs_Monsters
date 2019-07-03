@@ -24,7 +24,7 @@ public class Unit : MonoBehaviour
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hit))
 		{
-			if (Input.GetKey(KeyCode.Mouse0))
+			if (Input.GetKey(KeyCode.Mouse0) && GameManager.instance.selectedObject == this.gameObject)
 			{
 				// Find the direction to move in
 				Vector3 dir = hit.point - transform.position;
@@ -34,16 +34,20 @@ public class Unit : MonoBehaviour
 				Debug.Log(dir);
 				// Now move your character in world space 
 				agent.destination = new Vector3(hit.point.x,0, hit.point.z);
+
 				GameObject obj = Instantiate(locationPointerPrefab, new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.identity) as GameObject;
 				Destroy(obj, 1);
 				// transform.Translate (dir * Time.DeltaTime * speed); // Try this if it doesn't work
 			}
 		}
+
+		isSelected = (GameManager.instance.selectedObject == this.gameObject) ? true : false;
+		selectionCanvas.SetActive(isSelected);
 	}
 
 	private void OnMouseDown()
 	{
-		isSelected = !isSelected;
-		selectionCanvas.SetActive(isSelected);
+		GameManager.instance.selectedObject = this.gameObject;
+		
 	}
 }
