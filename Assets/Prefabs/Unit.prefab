@@ -347,12 +347,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1549571253504426028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65745b6048798df4b9effc2c7b1a79f3, type: 3}
+  m_Script: {fileID: 11500000, guid: b452878797aaac441a56141c3e5d2dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionCanvas: {fileID: 1549571252894272273}
-  LocationPrefab: {fileID: 5539223849679806643, guid: 0474646975f16f44eb493cc4b0a2db54,
-    type: 3}
+  selectionCanvas: {fileID: 0}
+  locationPointerPrefab: {fileID: 0}
 --- !u!195 &1549571253504426022
 NavMeshAgent:
   m_ObjectHideFlags: 0
