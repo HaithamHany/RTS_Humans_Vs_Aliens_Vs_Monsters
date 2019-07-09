@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 1549571253504426022}
   m_Layer: 0
   m_Name: Unit
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -353,6 +353,7 @@ MonoBehaviour:
   selectionCanvas: {fileID: 1549571252894272273}
   locationPointerPrefab: {fileID: 3252873086288250816, guid: d19b0761dccabe640b2b60c05643c123,
     type: 3}
+  Ref: {fileID: 0}
 --- !u!195 &1549571253504426022
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ NavMeshAgent:
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 1000
-  m_StoppingDistance: 0
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
