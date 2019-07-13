@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
 	[SerializeField]
 	private GameObject selectionCanvas;
-	[SerializeField]
-	private GameObject locationPointerPrefab;
 
 	private bool isSelected;
 
@@ -20,6 +19,7 @@ public class Unit : MonoBehaviour
 	private void Start()
 	{
 		agent = GetComponent<NavMeshAgent>();
+		UnitManager.Instance.AllUnits.Add(this.gameObject.GetComponent<Unit>());
 	}
 
 	public void setisSelected(bool isSelected)
@@ -29,9 +29,9 @@ public class Unit : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		GameManager.Instance.DeselectAllSelectedUnits();
-		GameManager.Instance.currentSelectedUnit = this.gameObject;
-		GameManager.Instance.selectedGroupUnits.Add(this.gameObject);
+		UnitManager.Instance.DeselectAllSelectedUnits();
+		UnitManager.Instance.currentSelectedUnit = this.gameObject;
+		UnitManager.Instance.selectedGroupUnits.Add(this.gameObject);
 		setisSelected(true);
 	}
 
@@ -42,17 +42,15 @@ public class Unit : MonoBehaviour
 
 		// Make it so that its only in x and y axis
 		dir.y = 0; // No vertical movement
-			   // Now move your character in world space 
-		agent.destination = new Vector3(hit.point.x, 0, hit.point.z);
 
-		GameObject obj = Instantiate(locationPointerPrefab, new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.identity) as GameObject;
-		Destroy(obj, 1);
+		agent.destination = new Vector3(hit.point.x, 0, hit.point.z);
 		// transform.Translate (dir * Time.DeltaTime * speed); // Try this if it doesn't work
 	}
 
 	public void MoveUnit(RaycastHit hit)
 	{
-		MoveToDirection(hit);		
+		MoveToDirection(hit);
+
 	}
 
 }
