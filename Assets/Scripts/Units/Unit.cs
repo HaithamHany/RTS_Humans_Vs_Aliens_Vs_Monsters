@@ -32,7 +32,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void Start()
 	{
 		agent = GetComponent<NavMeshAgent>();
-		UnitManager.Instance.AllUnits.Add(this.gameObject.GetComponent<Unit>());
+		UnitManager.Instance.AllUnits.Add(this);
 	}
 
 	public void setisSelected(bool isSelected)
@@ -45,6 +45,8 @@ public abstract class Unit : MonoBehaviour
 		UnitManager.Instance.DeselectAllSelectedUnits();
 		UnitManager.Instance.currentSelectedUnit = this.gameObject;
 		UnitManager.Instance.selectedGroupUnits.Add(this.gameObject);
+		BuildingManager.Instance.currentSelectedBuilding = null;
+
 		setisSelected(true);
 	}
 

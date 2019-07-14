@@ -80,7 +80,10 @@ public class UnitManager : MonoBehaviour
 			{
 				DeselectAllSelectedUnits();
 				activatePointer(false);
+				BuildingManager.Instance.currentSelectedBuilding = null;
 			}
+
+
 		}
 
 		if (Input.GetMouseButtonUp(0))
@@ -100,11 +103,15 @@ public class UnitManager : MonoBehaviour
 					//AllUnits[i].agent.ResetPath();
 
 					//TODO use event instead of getComponenet to improve performance
+					BuildingManager.Instance.currentSelectedBuilding = null;
 				}
 
 			}
-			
+
 			isGroupSelecting = false;
+
+			//clear the building selection if group of  units are selected
+			
 		}
 
 	}

@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(UnitManager))]
+[RequireComponent(typeof(BuildingManager))]
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance;
 
 	private UnitManager unitManager;
 
-	Ray ray;
+	private BuildingManager buildingManager;
 
-	RaycastHit hit;
+	private Ray ray;
+
+	private RaycastHit hit;
+
+	public List<GameObject> currentSelectedObjects;  //make everyObject register here first
 
 	private void Awake()
 	{
@@ -25,6 +30,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		unitManager = GetComponent<UnitManager>();
+		buildingManager = GetComponent<BuildingManager>();
 	}
 
 	private void Update()
@@ -37,12 +43,23 @@ public class GameManager : MonoBehaviour
 		unitManager.UpdateUnits(hit);
 	}
 
+	private void UpdateBuildingManager()
+	{
+		buildingManager.UpdateAllBuildings();
+	}
+
 	private void updateALL()
 	{
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hit))
 		{
 			UpdateUnitManager();
+			UpdateBuildingManager();
 		}
+	}
+
+	public void ClearSelection(List<GameObject> selectedList)
+	{
+		currentSelectedObjects.Clear();
 	}
 }
