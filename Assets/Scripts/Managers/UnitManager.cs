@@ -97,7 +97,8 @@ public class UnitManager : MonoBehaviour
 				{
 					AllUnits[i].setisSelected(true);
 					selectedGroupUnits.Add(AllUnits[i].gameObject);
-				
+					//AllUnits[i].agent.ResetPath();
+
 					//TODO use event instead of getComponenet to improve performance
 				}
 
@@ -122,15 +123,22 @@ public class UnitManager : MonoBehaviour
 
 	private void UpdateGroupUnits(RaycastHit hit)
 	{
-
+		float stopingDistance = 0;
 		if (Input.GetKeyDown(KeyCode.Mouse1))
 		{
 			for (int i = 0; i < selectedGroupUnits.Count; i++)
 			{
-				
 				Unit unit = selectedGroupUnits[i].GetComponent<Unit>();
-				unit.MoveUnit(hit); //avoid getting componenet every frame use events instead
+				unit.agent.stoppingDistance = 10;
+			}
 
+			for (int i = 0; i < selectedGroupUnits.Count; i++)
+			{
+				stopingDistance += 5;
+				Unit unit = selectedGroupUnits[i].GetComponent<Unit>();
+				unit.agent.ResetPath();
+				unit.MoveUnit(hit); //avoid getting componenet every frame use events instead
+				unit.agent.stoppingDistance += stopingDistance;
 				//GameObject obj = Instantiate(locationPointerPrefab, new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.identity) as GameObject;
 				//Destroy(obj, 1);
 				activatePointer(hit);
@@ -142,14 +150,19 @@ public class UnitManager : MonoBehaviour
 
 	private void UpdateIndividualUnits()
 	{
-		
+		for (int i = 0; i < AllUnits.Count; i++)
+		{
+			AllUnits[i].upDateUnit();
+		}
 	}
 
 	public void DeselectAllSelectedUnits()
 	{
 		for (int i = 0; i < selectedGroupUnits.Count; i++)
 		{
-			selectedGroupUnits[i].GetComponent<Unit>().setisSelected(false); // avoid using get componenet every itiration
+			Unit unit = selectedGroupUnits[i].GetComponent<Unit>();
+			unit.setisSelected(false); // avoid using get componenet every itiration
+			//unit.agent.stoppingDistance = 10;
 		}
 		selectedGroupUnits.Clear();
 	}

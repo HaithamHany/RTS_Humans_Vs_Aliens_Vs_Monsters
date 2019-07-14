@@ -29,16 +29,20 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		UpdateUnitManager();
+		updateALL();
 	}
 
 	private void UpdateUnitManager()
 	{
+		unitManager.UpdateUnits(hit);
+	}
+
+	private void updateALL()
+	{
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hit))
 		{
-			unitManager.UpdateUnits(hit);
+			UpdateUnitManager();
 		}
 	}
-
 }

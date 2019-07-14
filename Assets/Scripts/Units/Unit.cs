@@ -4,19 +4,32 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Unit : MonoBehaviour
+public abstract class Unit : MonoBehaviour
 {
 	[SerializeField]
 	private GameObject selectionCanvas;
 
 	private bool isSelected;
 
-	private NavMeshAgent agent;
+	public NavMeshAgent agent;
 
 	private Collider lastSelected = null;
 
+	//unit general properties
+	[SerializeField]
+	protected float Speed;
 
-	private void Start()
+	[SerializeField]
+	protected float Health;
+
+	[SerializeField]
+	protected float Damage;
+
+	[SerializeField]
+	protected bool isDead;
+
+
+	protected virtual void Start()
 	{
 		agent = GetComponent<NavMeshAgent>();
 		UnitManager.Instance.AllUnits.Add(this.gameObject.GetComponent<Unit>());
@@ -27,7 +40,7 @@ public class Unit : MonoBehaviour
 		selectionCanvas.SetActive(isSelected);
 	}
 
-	private void OnMouseDown()
+	protected virtual void OnMouseDown()
 	{
 		UnitManager.Instance.DeselectAllSelectedUnits();
 		UnitManager.Instance.currentSelectedUnit = this.gameObject;
@@ -51,6 +64,16 @@ public class Unit : MonoBehaviour
 	{
 		MoveToDirection(hit);
 
+	}
+
+	private void setData()
+	{
+		agent.speed = Speed;
+	}
+
+	public virtual void upDateUnit()
+	{
+		setData();
 	}
 
 }
