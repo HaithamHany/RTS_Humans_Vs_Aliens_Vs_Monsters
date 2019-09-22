@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Unit : MonoBehaviour
@@ -27,6 +28,9 @@ public abstract class Unit : MonoBehaviour
 
 	[SerializeField]
 	protected bool isDead;
+
+	[SerializeField]
+	protected Image uiImage;
 
 
 	protected virtual void Start()

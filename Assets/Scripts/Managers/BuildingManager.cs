@@ -28,7 +28,7 @@ public class BuildingManager : MonoBehaviour
 	{
 		for (int i = 0; i < AllBuildings.Count; i++)
 		{
-			AllBuildings[i].upDateBuilding();
+			AllBuildings[i].UpDateBuilding();
 		}
 	}
 }
