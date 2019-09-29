@@ -40,8 +40,8 @@ public abstract class Building : MonoBehaviour
 
 	protected virtual void OnMouseDown()
 	{
-
-		BuildingManager.Instance.currentSelectedBuilding= this.gameObject;
+        refreshItems();
+        BuildingManager.Instance.currentSelectedBuilding= this.gameObject;
 		setisSelected(true);		
 		UnitManager.Instance.DeselectAllSelectedUnits(); //deselctingall units when selecting buildings			
 		ShowBuildingItems();
@@ -80,11 +80,11 @@ public abstract class Building : MonoBehaviour
 		isSelected = _isSelected;
 	}
 
-	private void removeItems()
+	private void removeItems(bool isSelected)
 	{
 		if(!isSelected)
-		{
-			foreach (var item in items)
+        { 
+			foreach (var item in this.items)
 			{
 				Destroy(item); //temporary. should be using object pooling
 			}
@@ -93,11 +93,22 @@ public abstract class Building : MonoBehaviour
 		}
 	}
 
+    private void refreshItems()
+    {
+        foreach (var item in this.items)
+        {
+            Destroy(item); //temporary. should be using object pooling
+        }
+
+        items.Clear();
+    }
+
 	public void UpDateBuilding()
 	{
 		isSelected = (BuildingManager.Instance.currentSelectedBuilding == this.gameObject) ? true : false;
-		setisSelected(isSelected);
-		removeItems();
+		setisSelected(isSelected); //use events in the future
+		removeItems(isSelected); // use events in the future
+		Debug.Log(isSelected+" "+this.gameObject.name);
 	}
 
 	
